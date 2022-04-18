@@ -1,6 +1,6 @@
 # app_clean_architecture
 
-A new Flutter project.
+Meu primeiro app usando o conceitos de clean architecture, integrando dartz e mockito.
 
 ## Getting Started
 
