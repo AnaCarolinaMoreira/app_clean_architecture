@@ -1,4 +1,3 @@
-//tratando erro dentro do proprio dominio
-abstract class FailureSearch implements Exception{
+abstract class FailureSearch implements Exception {}
 
-}
+class InvalidTextError implements FailureSearch {}
