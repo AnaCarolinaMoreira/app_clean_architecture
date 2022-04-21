@@ -1,3 +1,5 @@
+import 'package:app_clean_architecture/modules/search/infra/models/result_search_model.dart';
+
 abstract class SearchDataSource {
-  Future<List<>>getSearch(String? searchText);
+  Future<List<ResultSearchModel>>getSearch(String? searchText);
 }
