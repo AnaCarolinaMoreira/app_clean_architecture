@@ -5,28 +5,24 @@ import 'package:app_clean_architecture/modules/search/infra/datasources/search_d
 import 'package:dartz/dartz.dart';
 
 class SearchRepositoryImpl implements SearchRepository {
+  final SearchDatasource datasource;
 
-final SearchDataSource datasource;
-
-SearchRepositoryImpl(this.datasource); 
+  SearchRepositoryImpl(this.datasource);
 
   @override
   Future<Either<FailureSearch, List<ResultSearch>?>> search(
       String? searchText) async {
-
-        try{
-         final result = await datasource.getSearch(searchText);
-       //Right(result);
-          return right(result);
-        }on DatasourceError catch(e){ 
-          //error costumizado
-          return  left(e);
-        }catch(e){ 
-          //error desconhecido
-          //Left(DatasourceError());
-          return  left(DatasourceError());
-        }
-
- 
+    try {
+      final result = await datasource.getSearch(searchText);
+      //Right(result);
+      return right(result);
+    } on DatasourceError catch (e) {
+      //error costumizado
+      return left(e);
+    } catch (e) {
+      //error desconhecido
+      //Left(DatasourceError());
+      return left(DatasourceError());
+    }
   }
 }

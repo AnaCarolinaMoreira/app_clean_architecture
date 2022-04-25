@@ -7,28 +7,26 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+class SearchDatasourceMock extends Mock implements SearchDatasource {}
 
-class SearchDatasourceMock extends Mock implements SearchDataSource{}
 main() {
-  final datasource=SearchDatasourceMock();
+  final datasource = SearchDatasourceMock();
   final repository = SearchRepositoryImpl(datasource);
 
-  test('deve retorna uma lista de ResultSearc ', () async{
-    when(()=>datasource.getSearch(any()))
-    .thenAnswer((_) async =><ResultSearchModel>[]);
+  test('deve retorna uma lista de ResultSearc ', () async {
+    when(() => datasource.getSearch(any()))
+        .thenAnswer((_) async => <ResultSearchModel>[]);
 
     final result = await repository.search("ana");
 
-    expect(result|null, isA<List<ResultSearch>>());
+    expect(result | null, isA<List<ResultSearch>>());
   });
 
-
-
-   test('deve retorna um DatasourceError se o datasource falhar', () async{
+  test('deve retorna um DatasourceError se o datasource falhar', () async {
     //when(datasource.getSearch(any)).thenThrow(Exception());
-    when(()=> datasource.getSearch(any())).thenThrow(Exception());
+    when(() => datasource.getSearch(any())).thenThrow(Exception());
     final result = await repository.search("ana");
-    expect(result.fold(id, id),isA<DatasourceError>());
+    expect(result.fold(id, id), isA<DatasourceError>());
   });
 }
 //when(() => repository.search(any())).thenAnswer((_)async => Right(<ResultSearch>[]));
